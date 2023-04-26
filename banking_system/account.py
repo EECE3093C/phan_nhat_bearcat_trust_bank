@@ -66,6 +66,13 @@ class CheckingAccount(Account):
 
     # todo: Add the following methods:
     #       __init__
+    
+    def __init__(self, account_number, account_holder_name, balance, overdraft_limit = 0):
+        # Call the parent class initializer with the provided account number, account holder name, and balance
+        super().__init__(account_number, account_holder_name, balance)
+        
+        # Initialize the overdraft limit attribute with the provided overdraft limit parameter (or the default value of 0 if no parameter is provided)
+        self.overdraft_limit = overdraft_limit
 
     def withdraw(self, amount):
         """Withdraw the given amount from the account if it doesn't exceed the overdraft limit."""
