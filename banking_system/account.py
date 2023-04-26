@@ -6,10 +6,20 @@ class Account:
     #       deposit
     #       withdraw
     
+    def __init__(self, account_number, account_holder_name, balance):
+        # Initialize the account number attribute with the provided account number parameter
+        self.account_number = account_number
+    
+        # Initialize the account holder name attribute with the provided account holder name parameter
+        self.account_holder_name = account_holder_name
+    
+        # Initialize the balance attribute with the provided balance parameter
+        self.balance = balance
+        
     def deposit(self, amount):
         # Add the provided amount to the current balance
         self.balance += amount
-     
+        
     def get_balance(self):
         """Return the current balance of the account."""
         return self.balance
