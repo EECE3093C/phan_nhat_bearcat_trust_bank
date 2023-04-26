@@ -15,7 +15,11 @@ class Account:
     
         # Initialize the balance attribute with the provided balance parameter
         self.balance = balance
-     
+        
+    def deposit(self, amount):
+        # Add the provided amount to the current balance
+        self.balance += amount
+        
     def get_balance(self):
         """Return the current balance of the account."""
         return self.balance
