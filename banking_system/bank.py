@@ -8,6 +8,22 @@ class Bank:
 
     # todo: Add the following method(s):
     #       create_account
+    
+    def create_account(self, account_type, account_number, account_holder_name, balance, interest_rate = 0.0, overdraft_limit = 0):
+        # Check the account_type parameter to determine which type of account to create
+        if account_type == "SavingsAccount":
+            # Create a new SavingsAccount instance with the provided account number, account holder name, balance, and interest rate
+            account = SavingsAccount(account_number, account_holder_name, balance, interest_rate)
+        elif account_type == "CheckingAccount":
+            # Create a new CheckingAccount instance with the provided account number, account holder name, balance, and overdraft limit
+            account = CheckingAccount(account_number, account_holder_name, balance, overdraft_limit)
+        else: 
+            # If the account_type parameter is not valid, print an error message and return
+            print("Invalid account type")
+            return
+        # Add the new account to the list of accounts in the Bank instance
+        self.accounts.append(account)
+        
 
     def delete_account(self, account_number):
         """Deletes an account with the given account number.
