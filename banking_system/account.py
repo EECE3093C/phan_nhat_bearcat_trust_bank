@@ -5,6 +5,10 @@ class Account:
     #       __init__
     #       deposit
     #       withdraw
+    
+    def deposit(self, amount):
+        # Add the provided amount to the current balance
+        self.balance += amount
      
     def get_balance(self):
         """Return the current balance of the account."""
