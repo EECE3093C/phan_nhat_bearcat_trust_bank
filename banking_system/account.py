@@ -5,7 +5,16 @@ class Account:
     #       __init__
     #       deposit
     #       withdraw
-     
+    
+    def withdraw(self, amount):
+        # Check if the requested withdrawal amount is less than or equal to the current balance
+        if amount <= self.balance:
+         # If so, subtract the amount from the current balance
+            self.balance -= amount
+        else:
+        # If not, print an error message indicating there are insufficient funds to withdraw
+            print("There are insufficient funds to withdraw.")
+            
     def get_balance(self):
         """Return the current balance of the account."""
         return self.balance
