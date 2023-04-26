@@ -20,7 +20,14 @@ class SavingsAccount(Account):
 
     # todo: Add the following method(s):
     #       __init__
-
+    
+    def __init__(self, account_number, account_holder_name, balance, interest_rate = 0.0):
+        # Call the parent class initializer with the provided account number, account holder name, and balance
+        super().__init__(account_number, account_holder_name, balance)
+        
+        # Initialize the interest rate attribute with the provided interest rate parameter (or the default value of 0.0 if no parameter is provided)
+        self.interest_rate = interest_rate
+        
     def calculate_interest(self):
         """Calculate and return the interest on the account balance."""
         return self.balance * (self.interest_rate / 100)
