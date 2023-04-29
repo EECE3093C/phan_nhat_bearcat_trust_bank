@@ -1,59 +1,48 @@
 # UML Sequence Diagram
-# UML Sequence Diagram
 ### The following sequence diagram demonstrates the interactions between a user and the bank system
+* Creating a Savings account
+* Creating a Checking account
+* Depositing to a Checking account
+* Withdrawing from a Savings account
 ```mermaid
 sequenceDiagram
     participant User as User
     participant Bank as Bank
-    participant SavingsAccount as SavingsAccount
-    participant CheckingAccount as CheckingAccount
+    participant Savings Account as SavingsAccount
+    participant Checking Account as CheckingAccount
     participant Account as Account
 
-    User->>Bank: create_account("SavingsAccount", ...)
-    activate Bank
-    Bank->>SavingsAccount: __init__(account_number, account_holder_name, balance, interest_rate)
-    activate SavingsAccount
-    SavingsAccount->>Account: __init__(account_number, account_holder_name, balance)
-    activate Account
-    Bank->>Bank: accounts.append(savings_account)
-    deactivate Account
-    deactivate SavingsAccount
-    deactivate Bank
+    User ->> Bank: create Savings account
+    Bank ->> Bank: create_account("SavingsAccount",...)
+    Bank ->> SavingsAccount: __init__(account_number, account_holder_name, balance, interest_rate)
+    Bank ->> Bank: accounts.append(savings_account)
 
-    User->>Bank: create_account("CheckingAccount", ...)
-    activate Bank
-    Bank->>CheckingAccount: __init__(account_number, account_holder_name, balance, overdraft_limit)
-    activate CheckingAccount
-    CheckingAccount->>Account: __init__(account_number, account_holder_name, balance)
-    activate Account
-    Bank->>Bank: accounts.append(checking_account)
-    deactivate Account
-    deactivate CheckingAccount
-    deactivate Bank
+    User ->> Bank: create Checking account
+    Bank ->> Bank: create_account("CheckingAccount",...)
+    Bank ->> CheckingAccount: __init__(account_number, account_holder_name, balance, overdraft_limit)
+    Bank ->> Bank: accounts.append(checking_account)
 
-    User->>Bank: find_account(account_number)
-    activate Bank
-    Bank->>Bank: find_account(account_number)
-    deactivate Bank
+    User ->> Bank: find account: account_number)
+    Bank ->> Bank: find_account(account_number)
+    Bank -->> User: Account
+    
+    User ->> Bank: deposit (amount)
+    Bank ->> Account: deposit(amount)
+    alt "Account type is SavingsAccount"
+        Account ->> SavingsAccount: deposit(amount)
+        SavingsAccount ->> SavingsAccount: calculate_interest()
+    end
 
-    User->>CheckingAccount: deposit(amount)
-    activate CheckingAccount
-    CheckingAccount->>Account: deposit(amount)
-    activate Account
-    deactivate Account
-    deactivate CheckingAccount
+    User ->> Bank: delete_account(account_number)
+    Bank ->> Bank: accounts.remove(account)
+    
+    User ->> Bank: withdraw (amount)
+    Bank ->> Account: withdraw (amount)
+    alt "Account type is CheckingAccount"
+        Account ->> CheckingAccount: withdraw(amount)
+        CheckingAccount -->> Bank: withdraw(amount)
+    end
 
-    User->>Bank: delete_account(account_number)
-    activate Bank
-    Bank->>Bank: accounts.remove(account)
-    deactivate Bank
-
-    User->>SavingsAccount: withdraw(amount)
-    activate SavingsAccount
-    SavingsAccount->>Account: withdraw(amount)
-    activate Account
-    deactivate Account
-    deactivate SavingsAccount
 
 
 
